@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(dplyr)
 library(ggplot2)
-setwd("C:\\Users\\Dell\\Documents\\R Project\\Dplyr\\Dplyr_Intro")
+setwd("C:\\Users\\Dell\\Documents\\R Project\\Coursera_Dplyr\\Dplyr_Intro")
 ```
 
 
@@ -27,16 +27,37 @@ knitr::include_graphics("df.png")
 #Filter
 
 ```{r}
-mpg
-head(mpg)
-str(mpg)
+mpg #entire table/Data frame
+head(mpg) #first 10 rows
+str(mpg) #Structure of table
+dim(mpg) #dimension
+names(mpg) #fields/dimension names
+```
+```{r}
+hist(mpg$cty) #histogram of column city of data frame mpg
+filter(mpg, cty > 25)
+filter(mpg, cty > 25 & model == "civic")
+```
+
+#Select
+```{r}
+select(mpg, manufacturer)
+names(mpg)
+select(mpg,c(7,8)) #select(table_Name, column(Column_No.1,Column_No.n))
 ```
 
 
-
-#Select
-
 #Pipe
+```{r}
+mpg%>%
+  filter(cty>25)%>%
+  select(c(7,8)) #Club all the steps. Pipe character pass the results to next statement
+#what model of cars get the worst gas mileage (under 15mpg)
+mpg%>%
+  filter(cty<15)%>%
+  select(c(2))
+```
+
 
 #Group By
 
